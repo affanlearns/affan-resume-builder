@@ -1,60 +1,41 @@
-document.getElementById("resumeForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-
+// Live Preview Update
+function updatePreview() {
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
   const phone = document.getElementById("phone").value;
+  const linkedin = document.getElementById("linkedin").value;
   const education = document.getElementById("education").value;
   const experience = document.getElementById("experience").value;
   const skills = document.getElementById("skills").value;
+  const hobbies = document.getElementById("hobbies").value;
   const template = document.getElementById("templateSelect").value;
 
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
+  const output = document.getElementById("resumeOutput");
+  output.className = template === "2" ? "template-2" : "template-1";
 
-  let y = 20;
+  let html = `<h2>${name}</h2>`;
+  html += `<p><strong>Email:</strong> ${email}</p>`;
+  html += `<p><strong>Phone:</strong> ${phone}</p>`;
+  html += `<p><strong>LinkedIn:</strong> ${linkedin}</p>`;
+  html += `<h3>Education</h3><p>${education}</p>`;
+  html += `<h3>Experience</h3><p>${experience}</p>`;
+  html += `<h3>Skills</h3><p>${skills}</p>`;
+  html += `<h3>Hobbies</h3><p>${hobbies}</p>`;
 
-  if (template === "2") {
-    doc.setFillColor(240, 240, 240);
-    doc.rect(10, 10, 190, 277, 'F');
+  const img = document.getElementById("photoPreview");
+  if (img.src && img.style.display !== "none") {
+    html = `<img src="${img.src}" style="width:100px; border-radius:50%; margin-bottom:10px;">` + html;
   }
 
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(18);
-  doc.text("Resume", 90, y);
-  y += 20;
+  output.innerHTML = html;
+}
 
-  const imgElement = document.getElementById("photoPreview");
-  if (imgElement.src && imgElement.style.display !== "none") {
-    doc.addImage(imgElement, "JPEG", 150, 10, 40, 40);
-  }
-
-  doc.setFontSize(12);
-  doc.setFont("helvetica", "normal");
-
-  doc.text(`Name: ${name}`, 20, y); y += 10;
-  doc.text(`Email: ${email}`, 20, y); y += 10;
-  doc.text(`Phone: ${phone}`, 20, y); y += 15;
-
-  doc.setFont("helvetica", "bold");
-  doc.text("Education:", 20, y); y += 8;
-  doc.setFont("helvetica", "normal");
-  doc.text(education, 20, y); y += 15;
-
-  doc.setFont("helvetica", "bold");
-  doc.text("Experience:", 20, y); y += 8;
-  doc.setFont("helvetica", "normal");
-  doc.text(experience, 20, y); y += 15;
-
-  doc.setFont("helvetica", "bold");
-  doc.text("Skills:", 20, y); y += 8;
-  doc.setFont("helvetica", "normal");
-  doc.text(skills, 20, y);
-
-  doc.save("resume.pdf");
+// Form Inputs Change Detection
+document.querySelectorAll("input, textarea, select").forEach(input => {
+  input.addEventListener("input", updatePreview);
 });
 
-// Photo preview
+// Photo Upload Preview
 document.getElementById("photoUpload").addEventListener("change", function () {
   const file = this.files[0];
   if (file) {
@@ -63,7 +44,33 @@ document.getElementById("photoUpload").addEventListener("change", function () {
       const img = document.getElementById("photoPreview");
       img.src = e.target.result;
       img.style.display = "block";
+      updatePreview();
     };
     reader.readAsDataURL(file);
   }
+});
+
+// PDF Download
+document.getElementById("resumeForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  doc.html(document.getElementById("resumeOutput"), {
+    callback: function (pdf) {
+      pdf.save("resume.pdf");
+    },
+    x: 10,
+    y: 10
+  });
+});
+
+// Save as Image
+document.getElementById("saveImageBtn").addEventListener("click", function () {
+  const element = document.getElementById("resumeOutput");
+  html2canvas(element).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "resume.png";
+    link.href = canvas.toDataURL();
+    link.click();
+  });
 });

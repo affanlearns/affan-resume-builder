@@ -27,23 +27,34 @@
         <option value="2">Template 2 (Boxed)</option>
       </select>
 
-      <!-- Form Inputs -->
+      <!-- Resume Fields -->
       <input type="text" placeholder="Full Name" id="name" required />
       <input type="email" placeholder="Email" id="email" required />
       <input type="text" placeholder="Phone Number" id="phone" />
+      <input type="text" placeholder="LinkedIn Profile" id="linkedin" />
       <textarea placeholder="Education" id="education"></textarea>
       <textarea placeholder="Experience" id="experience"></textarea>
       <textarea placeholder="Skills" id="skills"></textarea>
+      <textarea placeholder="Hobbies" id="hobbies"></textarea>
 
-      <button type="submit">Generate Resume PDF</button>
+      <button type="submit">Download PDF</button>
+      <button type="button" id="saveImageBtn">Save as Image</button>
     </form>
+
+    <!-- Live Preview -->
+    <section id="livePreview">
+      <h2>Live Resume Preview</h2>
+      <div id="resumeOutput" class="template-1"></div>
+    </section>
   </main>
 
   <footer>
     <p>&copy; 2025 Affan Resume Builder</p>
   </footer>
 
+  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
