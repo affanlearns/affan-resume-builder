@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Affan Resume Builder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Affan Resume Builder</h1>
+  </header>
+
+  <main>
+    <form id="resumeForm">
+      <input type="text" placeholder="Full Name" id="name" required />
+      <input type="email" placeholder="Email" id="email" required />
+      <input type="text" placeholder="Phone Number" id="phone" />
+      <textarea placeholder="Education (e.g. BS Computer Science)" id="education"></textarea>
+      <textarea placeholder="Experience (e.g. Web Developer at XYZ)" id="experience"></textarea>
+      <textarea placeholder="Skills (e.g. HTML, CSS, JS)" id="skills"></textarea>
+      <button type="submit">Generate Resume PDF</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Affan Resume Builder</p>
+  </footer>
+
+  <!-- PDF Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+  <!-- Your Script -->
+  <script src="script.js"></script>
+</body>
+</html>
