@@ -1,70 +1,93 @@
-/* General Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Body */
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f6f8;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
   color: #333;
-  line-height: 1.6;
-  padding: 20px;
 }
 
-/* Header */
 header {
-  text-align: center;
-  padding: 20px 0;
   background-color: #4caf50;
   color: white;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  padding: 20px;
+  text-align: center;
 }
 
-/* Form */
-form {
+main {
   max-width: 600px;
-  margin: auto;
+  margin: 30px auto;
   background: white;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Inputs and Textareas */
-input, textarea {
-  padding: 12px;
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
-  resize: vertical;
+  border-radius: 8px;
+  font-size: 15px;
 }
 
-/* Button */
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
 button {
   background-color: #4caf50;
   color: white;
-  padding: 14px;
-  font-size: 16px;
   border: none;
-  border-radius: 6px;
+  padding: 12px 18px;
+  font-size: 16px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s;
+  width: 100%;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
   background-color: #45a049;
 }
 
-/* Footer */
 footer {
   text-align: center;
-  margin-top: 40px;
+  padding: 10px;
   color: #777;
+  font-size: 14px;
+}
+
+/* Profile Photo Upload Box */
+.photo-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.photo-box label {
+  font-weight: bold;
+}
+
+.photo-box input[type="file"] {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  width: 100%;
+}
+
+#photoPreview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #4caf50;
+  display: none;
+  margin-top: 10px;
 }

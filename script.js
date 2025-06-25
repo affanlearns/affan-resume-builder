@@ -1,8 +1,6 @@
-// Wait for form submission
 document.getElementById("resumeForm").addEventListener("submit", function (e) {
-  e.preventDefault(); // Stop default form action
+  e.preventDefault();
 
-  // Get user input
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
   const phone = document.getElementById("phone").value;
@@ -10,20 +8,23 @@ document.getElementById("resumeForm").addEventListener("submit", function (e) {
   const experience = document.getElementById("experience").value;
   const skills = document.getElementById("skills").value;
 
-  // Access jsPDF from window
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
-  // Title
   doc.setFont("helvetica", "bold");
   doc.setFontSize(18);
   doc.text("Resume", 90, 20);
 
-  // Body
   doc.setFontSize(12);
   doc.setFont("helvetica", "normal");
 
   let y = 40;
+
+  // Photo logic
+  const imgElement = document.getElementById("photoPreview");
+  if (imgElement.src && imgElement.style.display !== "none") {
+    doc.addImage(imgElement, "JPEG", 150, 10, 40, 40);
+  }
 
   doc.text(`Name: ${name}`, 20, y); y += 10;
   doc.text(`Email: ${email}`, 20, y); y += 10;
@@ -44,6 +45,19 @@ document.getElementById("resumeForm").addEventListener("submit", function (e) {
   doc.setFont("helvetica", "normal");
   doc.text(skills, 20, y);
 
-  // Save PDF
   doc.save("resume.pdf");
+});
+
+// Show image preview
+document.getElementById("photoUpload").addEventListener("change", function () {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const img = document.getElementById("photoPreview");
+      img.src = e.target.result;
+      img.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+  }
 });

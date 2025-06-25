@@ -13,12 +13,19 @@
 
   <main>
     <form id="resumeForm">
+      <!-- Upload square -->
+      <div class="photo-box">
+        <label for="photoUpload">Upload Photo</label>
+        <input type="file" id="photoUpload" accept="image/*" />
+        <img id="photoPreview" src="" alt="Photo Preview" />
+      </div>
+
       <input type="text" placeholder="Full Name" id="name" required />
       <input type="email" placeholder="Email" id="email" required />
       <input type="text" placeholder="Phone Number" id="phone" />
-      <textarea placeholder="Education (e.g. BS Computer Science)" id="education"></textarea>
-      <textarea placeholder="Experience (e.g. Web Developer at XYZ)" id="experience"></textarea>
-      <textarea placeholder="Skills (e.g. HTML, CSS, JS)" id="skills"></textarea>
+      <textarea placeholder="Education" id="education"></textarea>
+      <textarea placeholder="Experience" id="experience"></textarea>
+      <textarea placeholder="Skills" id="skills"></textarea>
       <button type="submit">Generate Resume PDF</button>
     </form>
   </main>
@@ -27,10 +34,7 @@
     <p>&copy; 2025 Affan Resume Builder</p>
   </footer>
 
-  <!-- PDF Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  
-  <!-- Your Script -->
   <script src="script.js"></script>
 </body>
 </html>
