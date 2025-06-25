@@ -7,24 +7,30 @@ document.getElementById("resumeForm").addEventListener("submit", function (e) {
   const education = document.getElementById("education").value;
   const experience = document.getElementById("experience").value;
   const skills = document.getElementById("skills").value;
+  const template = document.getElementById("templateSelect").value;
 
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
+  let y = 20;
+
+  if (template === "2") {
+    doc.setFillColor(240, 240, 240);
+    doc.rect(10, 10, 190, 277, 'F');
+  }
+
   doc.setFont("helvetica", "bold");
   doc.setFontSize(18);
-  doc.text("Resume", 90, 20);
+  doc.text("Resume", 90, y);
+  y += 20;
 
-  doc.setFontSize(12);
-  doc.setFont("helvetica", "normal");
-
-  let y = 40;
-
-  // Photo logic
   const imgElement = document.getElementById("photoPreview");
   if (imgElement.src && imgElement.style.display !== "none") {
     doc.addImage(imgElement, "JPEG", 150, 10, 40, 40);
   }
+
+  doc.setFontSize(12);
+  doc.setFont("helvetica", "normal");
 
   doc.text(`Name: ${name}`, 20, y); y += 10;
   doc.text(`Email: ${email}`, 20, y); y += 10;
@@ -48,7 +54,7 @@ document.getElementById("resumeForm").addEventListener("submit", function (e) {
   doc.save("resume.pdf");
 });
 
-// Show image preview
+// Photo preview
 document.getElementById("photoUpload").addEventListener("change", function () {
   const file = this.files[0];
   if (file) {
